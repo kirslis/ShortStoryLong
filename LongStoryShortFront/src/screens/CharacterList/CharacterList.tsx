@@ -9,7 +9,8 @@ import {MainInfoLabels} from "./index/MainInfoLabels.tsx";
 import {SpeedACLabels} from "./index/SpeedACLabels.tsx";
 import {MoneyAndHealthLabels} from "./index/MoneyAndHealthLabels.tsx";
 import {RightHeader} from "./RightPart/RightHeader.tsx";
-import {MultiLabel} from "./MultiLabel/MultiLabel.tsx";
+import {MultiLabel} from "./RightPart/MultiPanel/MultiLabel.tsx";
+import {RightInfoPanel} from "./RightPart/RightInfoPanel.tsx";
 
 export const CharacterList: FC = () => {
     const [characterStats, setCharacterStats] = useState<character>({
@@ -119,17 +120,12 @@ export const CharacterList: FC = () => {
                             {/*</Grid>*/}
                         </Grid>
                     </Card>
-                    <Grid item container px={4} py={5}>
+                    <Grid item container  px={4} py={5}>
                         <Grid item width={"50%"}>
                             <StatPanel {...characterStats}/>
                         </Grid>
-                        <Grid item width={"50%"} flex={1} direction={"column"}>
-                            <Grid>
-                                <RightHeader/>
-                            </Grid>
-                            <Grid height={"100%"}>
-                                <MultiLabel/>
-                            </Grid>
+                        <Grid item width={"50%"} >
+                            <RightInfoPanel/>
                         </Grid>
                     </Grid>
                 </Card>

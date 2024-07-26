@@ -49,7 +49,7 @@ export const MainInfoLabels: FC<InfoLabelProps> = ({currentXp, lvl}: InfoLabelPr
         <Grid item width={"100%"} height={"100%"} flex={2}>
             <Box display={"flex"} gap={"20px"}>
                 <Box flex={1}>
-                    <CharacterIcon/>
+                    <CharacterIcon maxWidth={"100px"}/>
                 </Box>
                 <Box flex={5} display={"flex"} flexDirection={"column"}>
                     <Typography flex={2} fontWeight={"bold"} variant="h4" color={"text.main"}>

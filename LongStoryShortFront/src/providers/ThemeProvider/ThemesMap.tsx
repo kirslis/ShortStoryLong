@@ -14,7 +14,7 @@ export const ThemesMap: Record<ThemeType, Theme> = {
                 paper: Color.VERY_DARK_BLUE
             },
             border:{
-                main: Color.GRY_BLUE
+                main: Color.GREY_BLUE
             },
             text:{
                 main: Color.LIGHT_PURPLE_BLUE
@@ -44,16 +44,19 @@ export const ThemesMap: Record<ThemeType, Theme> = {
                 main: Color.LIGHT_DARK_BLUE,
             },
             secondary: {
-                main: Color.DARK_BLUE
+                main: Color.DARK_BLUE,
+                light: Color.LIGHTER_DARK_BLUE,
             },
             background: {
                 paper: Color.VERY_DARK_BLUE
             },
             border:{
-                main: Color.GRY_BLUE
+                main: Color.GREY_BLUE,
+                light: Color.LIGHT_GREY_BLUE
             },
             text:{
-                main: Color.LIGHT_PURPLE_BLUE
+                main: Color.LIGHT_PURPLE_BLUE,
+                dark: Color.PURPLE_BLUE,
             },
             success:{
                 main: Color.GREEN

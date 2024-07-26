@@ -58,9 +58,6 @@ export const PassiveFeelingsAndLanguage: FC<PassiveFeelingsAndLanguageProps> = (
                         '& .MuiInputBase-root': {
                             color: 'text.main',
                         },
-                        '&.input' : {
-                            borderColor:"red"
-                        }
                     }}>
 <Button>hello</Button>
                     </TextField>
