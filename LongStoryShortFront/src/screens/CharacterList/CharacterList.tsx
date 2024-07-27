@@ -112,12 +112,6 @@ export const CharacterList: FC = () => {
                                 <MoneyAndHealthLabels maxHP={characterStats.maxHP}
                                                       currentHP={characterStats.currentHP}/>
                             </Grid>
-                            {/*<Grid item>*/}
-                            {/*    <Button onClick={updateCharacter} sx={{*/}
-                            {/*        backgroundColor: baseTheme.colors.secondary*/}
-                            {/*    }}>*/}
-                            {/*    </Button>*/}
-                            {/*</Grid>*/}
                         </Grid>
                     </Card>
                     <Grid item container  px={4} py={5}>
