@@ -8,8 +8,17 @@
 // setInterval(App, 1000);
 
 
-function App() : JSX.Element {
 
+
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+
+function App() : JSX.Element {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        navigate('/characters/hero')
+    }, []);
     return (
         <></>
     );
