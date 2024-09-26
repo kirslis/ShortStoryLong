@@ -1,24 +1,19 @@
 import {FC} from "react";
-import {Box, Button, Typography} from "@mui/material";
+import {Box} from "@mui/material";
+import {StyledTextLabel} from "../../../styles/IndexStyled.ts";
+import {StyledAttackNameButton, StyledBaseAttackLabelButton} from "../../../styles/AttackLabelStyled.ts";
 
 type NameButtonProps = {
     name: string
 }
 
-const NameButton: FC<NameButtonProps> = ({name}: NameButtonProps) => {
+const NameButton = ({name}: NameButtonProps) => {
     return (
-        <Box flex={1} height={"100%"}>
-            <Button disableRipple fullWidth sx={{
-              height:"100%",
-                "&:hover": {
-                    bgcolor: "background.paper"
-                }
-            }}>
-                <Typography width={"100%"} textAlign={"start"} color={"text.main"}>
-                    {name}
-                </Typography>
-            </Button>
-        </Box>
+        <StyledAttackNameButton disableRipple >
+            <StyledTextLabel normal={"true"} variant={"h4"}>
+                {name}
+            </StyledTextLabel>
+        </StyledAttackNameButton>
     )
 }
 
@@ -28,20 +23,12 @@ type BonusButtonProps = {
 
 const BonusButton: FC<BonusButtonProps> = ({value}: BonusButtonProps) => {
     return (
-        <Button disableRipple sx={{
-            backgroundColor: "secondary.main",
-            border: 1,
-            borderColor: "border.main",
-            "&:hover": {
-                bgcolor: "secondary.main",
-                borderColor: "border.main",
-            }
-        }}>
-            <Typography color={"text.main"} variant={"h5"} my={"5px"}>
+        <StyledBaseAttackLabelButton disableRipple >
+            <StyledTextLabel color={"textColor.main"} variant={"h2"} my={"5px"} width={"100%"} textAlign={"center"}>
                 {(value > 0) ? '+' : null}
                 {value}
-            </Typography>
-        </Button>
+            </StyledTextLabel>
+        </StyledBaseAttackLabelButton>
     )
 }
 
@@ -51,19 +38,11 @@ type DamageButtonProps = {
 
 const DamageButton: FC<DamageButtonProps> = ({formulaName}: DamageButtonProps) => {
     return (
-        <Button disableRipple fullWidth sx={{
-            backgroundColor: "secondary.main",
-            border: 1,
-            borderColor: "border.main",
-            "&:hover": {
-                bgcolor: "secondary.main",
-                borderColor: "border.main",
-            }
-        }}>
-            <Typography width={"100%"} textAlign={"start"} color={"text.main"} variant={"h5"} my={"5px"}>
+        <StyledBaseAttackLabelButton disableRipple fullWidth>
+            <StyledTextLabel color={"textColor.main"} variant={"h3"} my={"5px"} textAlign={"start"}>
                 {formulaName}
-            </Typography>
-        </Button>
+            </StyledTextLabel>
+        </StyledBaseAttackLabelButton>
     )
 }
 
@@ -72,9 +51,9 @@ export const AttackLabel: FC = () => {
         <Box width={"100%"} display={"flex"} borderBottom={1} borderColor={"border.main"}>
             <Box my={1} width={"100%"} display={"flex"}>
                 <Box flex={2}>
-                    <NameButton name={"mace"}/>
+                    <NameButton name={'MAce'}/>
                 </Box>
-                <Box flex={1} >
+                <Box flex={1} pl={1}>
                     <BonusButton value={3}/>
                 </Box>
                 <Box flex={2}>

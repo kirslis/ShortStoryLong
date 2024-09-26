@@ -1,14 +1,15 @@
 import {FC, useState} from "react";
-import {Box, Button, Collapse, TextField, Typography} from "@mui/material";
+import {Box, Button, Collapse, TextField} from "@mui/material";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import {StyledTextLabel} from "../../styles/IndexStyled.ts";
 
-type ClosableLabelProps = {
+interface IClosableLabelProps {
     name: string,
     value: string
 }
 
-export const ClosableLabel: FC<ClosableLabelProps> = ({name, value}: ClosableLabelProps) => {
+export const ClosableLabel = (props: IClosableLabelProps) => {
     const [isOpened, setIsOpened] = useState(true)
 
     const closeButtonClickHandler = () => {
@@ -16,18 +17,20 @@ export const ClosableLabel: FC<ClosableLabelProps> = ({name, value}: ClosableLab
     }
 
     return (
-        <Box display={"flex"} flexDirection={"column"}>
-            <Box display={"flex"} flex={1} justifyContent={"start"} alignItems={"center"}>
-                <Typography color={"text.main"} variant={"h6"}>
-                    {name}
-                </Typography>
+        <Box display={"flex"} flexDirection={"column"} gap={"5px"}>
+            <Box display={"flex"} flex={1} justifyContent={"start"} alignItems={"center"} gap={"5px"}>
+                <StyledTextLabel  variant={"h4"} dark={"true"}>
+                    {props.name.toUpperCase()}
+                </StyledTextLabel>
                 <Button disableRipple onClick={closeButtonClickHandler} sx={{
-                    minWidth: "10px"
+                    minWidth:"10px",
+                    width:"10px",
+                    height: "10px"
                 }}>
                     {isOpened ? <KeyboardArrowUpIcon sx={{
-                        color: "text.main"
+                        color: "textColor.main"
                     }}/> : <KeyboardArrowDownIcon sx={{
-                        color: "text.main"
+                        color: "textColor.main"
                     }}/>}
                 </Button>
             </Box>

@@ -1,4 +1,4 @@
-import {Box, Button, Card, Grid, Typography} from "@mui/material";
+import {Box, Button, Grid, Typography} from "@mui/material";
 import {FC} from "react";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useThemeProvider} from "../../providers/ThemeProvider/ThemeProvider.tsx";
@@ -14,54 +14,53 @@ export const Header: FC = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid sx={{
-                width: '100vw',
-                height: '100vh',
-                spacing: 0,
-                justify: 'space-around'
-            }}>
-                <Card sx={{
-                    backgroundColor: "header.main",
+            <Box display={"flex"} flexDirection={"column"} bgcolor={"background.paper"}
+                // overflow={"clip"}
+                 sx={{
+                     width: '100vw',
+                     height: '105vh',
+                 }}>
+                <Box  width={"100%"} height={"67px"} sx={{
                     borderBottom: 1,
                     borderColor: "border.main"
                 }}>
-                    <Grid container justifyContent="space-between" p={2}>
-                        <Grid item>
-                            <Grid container direction="row" spacing={2}>
-                                <Grid item>
+                    <Box bgcolor={"header.main"}>
+                        <Grid container justifyContent="space-between" pr={2}>
+                            <Grid item>
+                                <Grid container direction="row" spacing={2}>
+                                    <Grid item>
+                                    </Grid>
+                                    <Grid item>
+                                    </Grid>
                                 </Grid>
-                                <Grid item>
+                            </Grid>
+                            <Grid item>
+                                <Grid container justifyContent={"end"} direction={"column"} alignItems={"end"}>
+                                    <Grid item px={1}>
+                                        <AccountCircleIcon
+                                            color={(sessionStorage.getItem("accountId")) ? "primary" : "error"} sx={{
+                                            fontSize: "36px"
+                                        }}/>
+                                    </Grid>
+                                    <Grid item>
+                                        {(!sessionStorage.getItem("accountId")) ?
+                                            <Button onClick={createAccountButtonClickHandle}>
+                                                <Typography variant={"h4"} color={"error.main"}>
+                                                    create account
+                                                </Typography>
+                                            </Button> :
+                                            null
+                                        }
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item>
-                            <Grid container justifyContent={"flex-end"} direction={"column"} alignItems={"end"}>
-                                <Grid item px={1}>
-                                    <AccountCircleIcon
-                                        color={(sessionStorage.getItem("accountId")) ? "primary" : "error"} sx={{
-                                        fontSize: "70px"
-                                    }}/>
-                                </Grid>
-                                <Grid item>
-                                    {(!sessionStorage.getItem("accountId")) ?
-                                        <Button onClick={createAccountButtonClickHandle}>
-                                            <Typography color={"error.main"}>
-                                                create account
-                                            </Typography>
-                                        </Button> :
-                                        null
-                                    }
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Card>
-                <Box sx={{
-                    width: "100%",
-                }}>
+                    </Box>
+                </Box>
+                <Box >
                     <Outlet/>
                 </Box>
-            </Grid>
+            </Box>
         </ThemeProvider>
     )
 }

@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {Box, Grid, Typography} from "@mui/material";
-import MonitorHeartOutlinedIcon from '@mui/icons-material/MonitorHeartOutlined';
+import {Grid, Typography} from "@mui/material";
+import {HealthBorderWrapperStyled, HealthIconStyled} from "../styles/MoneyAndhealthLabelStyled.ts";
 
 type moneyAndHealthLabelsProps = {
     currentHP: number,
@@ -9,22 +9,14 @@ type moneyAndHealthLabelsProps = {
 
 export const MoneyAndHealthLabels: FC<moneyAndHealthLabelsProps> = ({currentHP, maxHP}: moneyAndHealthLabelsProps) => {
     return (
-        <Grid item alignSelf={"center"} flex={2}>
-            <Grid container justifyContent={"flex-end"}>
-                <Grid item>
-                    <Box display={"flex"} border={2}
-                         borderColor={"health.dark"}
-                         borderRadius={"20px"}>
-                        <Box p={2} display={"flex"} flex={1} alignItems={"center"} gap={"20px"}>
-                            <MonitorHeartOutlinedIcon flex={1} color={"health"} sx={{
-                                fontSize: "50px"
-                            }}/>
-                            <Typography flex={1} variant="h4" color={"health.main"}>
-                                {currentHP}/{maxHP}
-                            </Typography>
-                        </Box>
-                    </Box>
-                </Grid>
+        <Grid item container width={"20%"}>
+            <Grid item container justifyContent={"flex-end"} alignItems={"center"}>
+                    <HealthBorderWrapperStyled alignItems={"center"}>
+                        <HealthIconStyled/>
+                        <Typography variant="h2" color={"health.main"} fontWeight={"bold"}>
+                            {currentHP}/{maxHP}
+                        </Typography>
+                    </HealthBorderWrapperStyled>
             </Grid>
         </Grid>
     )

@@ -1,16 +1,16 @@
 import {FC} from "react";
-import {Box} from "@mui/material";
 import {ClosableLabel} from "../ClosableLabel.tsx";
+import {ClosableTextsWrapper} from "../../../styles/MultiPanelStyled.ts";
 
 export const NotesLabel: FC = () => {
     return(
-        <Box>
+        <ClosableTextsWrapper display={"flex"} flexDirection={"column"} gap={"10px"}>
            <ClosableLabel name={"notes"} value={""}/>
            <ClosableLabel name={"notes"} value={""}/>
            <ClosableLabel name={"notes"} value={""}/>
            <ClosableLabel name={"notes"} value={""}/>
            <ClosableLabel name={"notes"} value={""}/>
            <ClosableLabel name={"notes"} value={""}/>
-        </Box>
+        </ClosableTextsWrapper>
     )
 };

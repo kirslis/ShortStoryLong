@@ -4,6 +4,7 @@ export enum Color {
     DARK_BLUE = '#272e43', // button
     LIGHTER_DARK_BLUE = '#283351',
     GREY_BLUE = '#606b85', // border
+    DARK_GEY = '#c1c2c5',
     LIGHT_GREY_BLUE = '#6681a9', // border
     LIGHT_PURPLE_BLUE = '#e9e9ea',  // text
     PURPLE_BLUE = '#c7c8ca',  // text
@@ -13,7 +14,8 @@ export enum Color {
     DARK_TURQUOISE = '#1f3232',
     PINK = '#8451d9',
     LIGHTER_PINK = '#ae70fc',
-    HEADER_BLUE = '#283351'
+    HEADER_BLUE = '#283351',
+    ALMOST_BLACK = '#0a071d',
 }
 
 export type ThemeType = 'dark' | 'light';

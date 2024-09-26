@@ -1,39 +1,9 @@
 import {FC} from "react";
-import {Box, TextField, Typography} from "@mui/material";
-import {CharacterIcon} from "../../../index/CharacterIcon.tsx";
+import {Box} from "@mui/material";
 import {ClosableLabel} from "../ClosableLabel.tsx";
-
-type StyledTextFieldPros = {
-    label: string,
-    onChange: (value: string) => void,
-    value?: string
-};
-
-export const StyledTextField: FC<StyledTextFieldPros> = ({onChange, label, value}: StyledTextFieldPros) => {
-    return (
-        <Box flex={1}>
-            <Box borderBottom={1} borderColor={"border.main"}>
-                <TextField variant="standard"
-                           InputProps={{
-                               disableUnderline: true,
-                               style: {
-                                   fontSize: "25px"
-                               }
-                           }}
-                           sx={{
-                               '& .MuiInputBase-root': {
-                                   color: 'text.main',
-                               },
-                           }}/>
-            </Box>
-            <Typography variant={"h6"} sx={{
-                color: "text.dark"
-            }}>
-                {label}
-            </Typography>
-        </Box>
-    )
-}
+import {StyledCharacterIcon} from "../../../styles/MainInfoLabelStyled.ts";
+import {ClosableTextsWrapper} from "../../../styles/MultiPanelStyled.ts";
+import {UnderlinedTextField} from "../../../../../assets/forms/parts/UnderlinedTextField.tsx";
 
 export const PersonalityLabel: FC = () => {
 
@@ -42,25 +12,25 @@ export const PersonalityLabel: FC = () => {
     }
 
     return (
-        <Box display={"flex"} flexDirection={"column"} rowGap={"10px"}>
+        <ClosableTextsWrapper >
             <Box width={"100%"} display={"flex"} columnGap={"40px"}>
-                <StyledTextField label={"background"} onChange={BackgroundFieldChangeHandle} value={""}/>
-                <StyledTextField label={"worldview"} onChange={BackgroundFieldChangeHandle} value={""}/>
+                <UnderlinedTextField label={"BACKGROUND"} onChange={BackgroundFieldChangeHandle} value={""}/>
+                <UnderlinedTextField label={"WORLDVIEW"} onChange={BackgroundFieldChangeHandle} value={""}/>
             </Box>
             <Box display={"flex"} columnGap={"20px"}>
-                <CharacterIcon maxWidth={"250px"}/>
-                <Box>
+                <StyledCharacterIcon maxheight={"200px"} flex={1} srcimage={'https://lss-s3-files.s3.eu-north-1.amazonaws.com/avatar/6497180349365d9d4b3c43b4.webp?mod=1687628351463'}/>
+                <Box flex={2} display={"flex"} flexDirection={"column"} rowGap={"12px"}>
                     <Box width={"100%"} display={"flex"} columnGap={"40px"}>
-                        <StyledTextField label={"height"} onChange={BackgroundFieldChangeHandle} value={""}/>
-                        <StyledTextField label={"weight"} onChange={BackgroundFieldChangeHandle} value={""}/>
+                        <UnderlinedTextField label={"HEIGHT"} onChange={BackgroundFieldChangeHandle} value={""}/>
+                        <UnderlinedTextField label={"WEIGHT"} onChange={BackgroundFieldChangeHandle} value={""}/>
                     </Box>
                     <Box width={"100%"} display={"flex"} columnGap={"40px"}>
-                        <StyledTextField label={"age"} onChange={BackgroundFieldChangeHandle} value={""}/>
-                        <StyledTextField label={"eyes"} onChange={BackgroundFieldChangeHandle} value={""}/>
+                        <UnderlinedTextField label={"AGE"} onChange={BackgroundFieldChangeHandle} value={""}/>
+                        <UnderlinedTextField label={"EYES"} onChange={BackgroundFieldChangeHandle} value={""}/>
                     </Box>
                     <Box width={"100%"} display={"flex"} columnGap={"40px"}>
-                        <StyledTextField label={"skin"} onChange={BackgroundFieldChangeHandle} value={""}/>
-                        <StyledTextField label={"hair"} onChange={BackgroundFieldChangeHandle} value={""}/>
+                        <UnderlinedTextField label={"SKIN"} onChange={BackgroundFieldChangeHandle} value={""}/>
+                        <UnderlinedTextField label={"HAIR"} onChange={BackgroundFieldChangeHandle} value={""}/>
                     </Box>
                 </Box>
             </Box>
@@ -70,6 +40,6 @@ export const PersonalityLabel: FC = () => {
             <ClosableLabel name={"ideals"} value={""}/>
             <ClosableLabel name={"attachments"} value={""}/>
             <ClosableLabel name={"weaknesses"} value={""}/>
-        </Box>
+        </ClosableTextsWrapper>
     )
 }

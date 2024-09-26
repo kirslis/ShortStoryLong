@@ -1,6 +1,7 @@
 import {FC} from "react";
-import {Box, Grid, Typography} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import {StyledTextLabel} from "../styles/IndexStyled.ts";
 
 type SpeedACLabelsProps = {
     ac: number,
@@ -9,37 +10,36 @@ type SpeedACLabelsProps = {
 
 export const SpeedACLabels: FC<SpeedACLabelsProps> = ({ac, speed}: SpeedACLabelsProps) => {
     return (
-        <Grid item flex={2} >
+        <Grid item container width={"45%"}>
             <Grid container height={"100%"} width={"100%"} justifyContent={"center"} spacing={2}>
-                <Grid item mt={1}>
-                    <Box display={"flex"}>
-                        <ShieldOutlinedIcon color={"text"} sx={{
-                            fontSize: "100px"
-                        }}></ShieldOutlinedIcon>
-                        <Box position={"relative"}>
-                            <Typography align={"center"} position={"absolute"}
-                                        top={"30px"}
-                                        left={"-70px"}
-                                        variant="h4" color={"text.main"} sx={{}}>
-                                {ac}
-                            </Typography>
-                        </Box>
+                <Grid item>
+                    <Box display={"flex"} position={"relative"}>
+                        <ShieldOutlinedIcon sx={{
+                            fontSize: "60px"
+                        }}/>
+                        <StyledTextLabel textAlign={"center"} position={"absolute"} top={"19px"} left={"21px"}
+                                         variant="h3">
+                            {ac}
+                        </StyledTextLabel>
                     </Box>
                 </Grid>
-                <Grid item mt={2}>
-                    <Typography variant="h4" align={"center"} sx={{
-                        whiteSpace: "pre-wrap",
-                        color: "text.main"
-                    }}>{speed}{'\n'}speed</Typography>
+                <Grid item display={"flex"} mt={1} flexDirection={"column"} justifyItems={"start"}>
+                    <StyledTextLabel variant="h2" align={"center"}>
+                        {speed}
+                    </StyledTextLabel>
+                    <StyledTextLabel variant="h3" align={"center"}>
+                        speed
+                    </StyledTextLabel>
                 </Grid>
-                <Grid item mt={2}>
-                    <Typography variant="h4" align={"center"} sx={{
-                        color: "text.main"
-                    }}>{speed}</Typography>
-                    <Typography variant="h4" sx={{
-                        color: "text.main"
-                    }}>advantage</Typography>
+                <Grid item display={"flex"} mt={1} flexDirection={"column"} justifyContent={"begin"}>
+                    <StyledTextLabel variant="h2" align={"center"}>
+                        {speed}
+                    </StyledTextLabel>
+                    <StyledTextLabel variant="h3" align={"center"}>
+                        advantage
+                    </StyledTextLabel>
                 </Grid>
+
             </Grid>
         </Grid>
     )

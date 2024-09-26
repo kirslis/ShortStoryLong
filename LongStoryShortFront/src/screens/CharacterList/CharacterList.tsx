@@ -1,64 +1,38 @@
-import {Box, Card, Grid} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import {config} from "../../props/config.ts";
-import {FC, useEffect, useState} from "react";
-import {StatPanel} from "../../assets/forms/StatPanel.tsx";
-import {character} from "../../assets/forms/Data.tsx";
-import {ThemeProvider} from "@mui/material/styles";
-import {useThemeProvider} from "../../providers/ThemeProvider/ThemeProvider.tsx";
-import {MainInfoLabels} from "./index/MainInfoLabels.tsx";
+import {FC, useEffect} from "react";
+import {MainInfoLabels} from "./index/MainInfoDisplay/MainIfoLabels/MainInfoLabels.tsx";
 import {SpeedACLabels} from "./index/SpeedACLabels.tsx";
 import {MoneyAndHealthLabels} from "./index/MoneyAndHealthLabels.tsx";
-import {RightHeader} from "./RightPart/RightHeader.tsx";
-import {MultiLabel} from "./RightPart/MultiPanel/MultiLabel.tsx";
+import {useMainStatsStore} from "./CharacterListData/MainStatsStore.ts";
+import {useStatsStore} from "./CharacterListData/StatsStore.ts";
+import {useStatsProficiencyStore} from "./CharacterListData/StatsProficiencyStore.ts";
+import {useSkillsProficiencyStore} from "./CharacterListData/SkillsProficiencyStore.ts";
+import {useSkillsAdditionalBonusesStore} from "./CharacterListData/SkillsAdditionalBonusesStore.ts";
+import {useStatsAdditionalBonusesStore} from "./CharacterListData/StatsAdditionalBonusesStore.ts";
+import {StatPanel} from "./StatsAndSkillsPanel/StatPanels/StatPanel.tsx";
 import {RightInfoPanel} from "./RightPart/RightInfoPanel.tsx";
 
 export const CharacterList: FC = () => {
-    const [characterStats, setCharacterStats] = useState<character>({
-        ac: 10,
-        currentHP: 10,
-        currentXp: 0,
-        lvl: 1,
-        maxHP: 100,
-        name: "bob",
-        race: 0,
-        subRace: 0,
-        id: -1,
-        speed: 30,
-        skills: {
-            acrobatics: false,
-            animalHandling: false,
-            arcana: false,
-            athletics: false,
-            deception: false,
-            history: false,
-            insight: false,
-            intimidation: false,
-            investigation: false,
-            medicine: false,
-            nature: false,
-            perception: false,
-            performance: false,
-            persuasion: false,
-            religion: false,
-            sleightOfHand: false,
-            stealth: false,
-            survival: false,
-        },
-        stats: {
-            charisma: 10,
-            constitution: 10,
-            dexterity: 10,
-            intelligence: 10,
-            strength: 10,
-            wisdom: 10,
-        },
-        charismaProficiency: false,
-        constitutionProficiency: false,
-        dexterityProficiency: false,
-        intelligenceProficiency: false,
-        strengthProficiency: false,
-        wisdomProficiency: false
-    })
+    const {mainStats, setMainStats} = useMainStatsStore((state) => ({
+        mainStats: state.mainStats,
+        setMainStats: state.setMainStats
+    }))
+    const {setStats} = useStatsStore((state) => ({
+        setStats: state.setStats
+    }))
+    const {setStatsProficiency} = useStatsProficiencyStore((state) => ({
+        setStatsProficiency: state.setStatsProficiency
+    }))
+    const {setStatsAdditionalBonuses} = useStatsAdditionalBonusesStore((state) => ({
+        setStatsAdditionalBonuses: state.setStatsAdditionalBonuses
+    }))
+    const {setSkillsProficiency} = useSkillsProficiencyStore((state) => ({
+        setSkillsProficiency: state.setSkillsProficiency
+    }))
+    const {setSkillsAdditionalBonuses} = useSkillsAdditionalBonusesStore((state) => ({
+        setSkillsAdditionalBonuses: state.setSkillsAdditionalBonuses
+    }))
 
     async function getUserCharacter() {
         try {
@@ -72,23 +46,31 @@ export const CharacterList: FC = () => {
                 throw new Error(`Error! status: ${response.status}`)
             }
 
-            const res = (await response.json()) as character;
+            const res = (await response.json());
+            console.log(res)
             return res
         } catch (error) {
             if (error instanceof Error) {
                 console.log('error message: ', error.message);
-                return characterStats;
             } else {
                 console.log('unexpected error: ', error);
-                return characterStats;
             }
         }
     }
 
     async function updateCharacter() {
-        if (characterStats.id != localStorage.getItem("redactingCharacterId") as unknown as number) {
-            setCharacterStats(await getUserCharacter())
-            console.log(characterStats)
+        if (mainStats.id != localStorage.getItem("redactingCharacterId") as unknown as number) {
+            const data = (await getUserCharacter())
+            if (data) {
+                setMainStats(data.mainStats)
+
+                setStats(data.mainStats.stats)
+                setStatsProficiency(data.mainStats.statsProficiency)
+                setStatsAdditionalBonuses(data.mainStats.statsAdditionalBonuses)
+
+                setSkillsProficiency(data.mainStats.skillsProficiency)
+                setSkillsAdditionalBonuses(data.mainStats.skillsAdditionalBonuses)
+            }
         }
     }
 
@@ -96,34 +78,29 @@ export const CharacterList: FC = () => {
         void updateCharacter();
     }, [])
     return (
-        <ThemeProvider theme={useThemeProvider}>
-            <Box width={"100%"} heigth={"100%"}>
-                <Card style={{
-                    position: "relative",
-                }}>
-                    <Card sx={{
-                        backgroundColor: "secondary.main"
-                    }}>
-                        <Grid item width={"100%"} height={"100%"}>
-                            <Grid container justifyContent={"space-between"} direction={"row"} width={"100%"} px={4}
-                                  py={1}>
-                                <MainInfoLabels currentXp={characterStats.currentXp} lvl={characterStats.lvl}/>
-                                <SpeedACLabels speed={characterStats.speed} ac={characterStats.ac}/>
-                                <MoneyAndHealthLabels maxHP={characterStats.maxHP}
-                                                      currentHP={characterStats.currentHP}/>
-                            </Grid>
+                <Box height={"100%"}  display={"flex"} flexDirection={"column"} alignItems={"center"} gap={3}>
+                    <Box height={"60px"}  width={"100%"} py={1}
+                          bgcolor={"secondary.main"}
+                          borderBottom={1}
+                          borderColor={"border.main"} display={"flex"} justifyContent={"center"}>
+                        <Box display={"flex"}  width={"70%"} height={"100%"}>
+                            <MainInfoLabels currentXp={mainStats.currentXp}
+                                            lvl={mainStats.lvl}/>
+                            <SpeedACLabels speed={mainStats.speed} ac={mainStats.ac}/>
+                            <MoneyAndHealthLabels maxHP={mainStats.maxHP}
+                                                  currentHP={mainStats.currentHP}/>
+                        </Box>
+                    </Box>
+                    <Box  width={"70%"} flex={1}  display={"flex"}
+                           overflow={"clip"} justifyContent={"space-between"}
+                    >
+                        <Grid item width={"49%"} justifySelf={"center"}>
+                            <StatPanel/>
                         </Grid>
-                    </Card>
-                    <Grid item container  px={4} py={5}>
-                        <Grid item width={"50%"}>
-                            <StatPanel {...characterStats}/>
-                        </Grid>
-                        <Grid item width={"50%"} >
+                        <Grid item width={"49%"} height={"100%"}>
                             <RightInfoPanel/>
                         </Grid>
-                    </Grid>
-                </Card>
-            </Box>
-        </ThemeProvider>
+                    </Box>
+                </Box>
     )
 }

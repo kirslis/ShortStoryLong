@@ -16,7 +16,7 @@ export const ThemesMap: Record<ThemeType, Theme> = {
             border:{
                 main: Color.GREY_BLUE
             },
-            text:{
+            textColor:{
                 main: Color.LIGHT_PURPLE_BLUE
             },
             success:{
@@ -54,9 +54,9 @@ export const ThemesMap: Record<ThemeType, Theme> = {
                 main: Color.GREY_BLUE,
                 light: Color.LIGHT_GREY_BLUE
             },
-            text:{
+            textColor:{
                 main: Color.LIGHT_PURPLE_BLUE,
-                dark: Color.PURPLE_BLUE,
+                dark: Color.DARK_GEY,
             },
             success:{
                 main: Color.GREEN
@@ -74,6 +74,9 @@ export const ThemesMap: Record<ThemeType, Theme> = {
             },
             header:{
                 main: Color.HEADER_BLUE
+            },
+            throwCard:{
+                main: Color.ALMOST_BLACK
             }
         }
     }
